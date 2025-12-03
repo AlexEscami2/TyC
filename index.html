@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,244 +10,295 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <link rel="stylesheet" href="global.css">
 
   <style>
-    /* Reutilizamos tus variables y clases de la landing */
     :root { color-scheme: light; }
+    /* Tus estilos base */
     .glass { backdrop-filter: blur(10px); background: linear-gradient(180deg, rgba(255,255,255,.6), rgba(255,255,255,.35)); border: 1px solid rgba(0,0,0,.07); transition: all 0.3s ease; }
     .gradient-text { background: linear-gradient(90deg, #FF25FF 0%, #ca1dca 55%, #af19af 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .dark .glass { backdrop-filter: blur(10px); background: linear-gradient(180deg, rgba(18,18,26,.6), rgba(18,18,26,.35)); border: 1px solid rgba(255,255,255,.07) }
-
-    /* Estilos específicos para el contenido de texto (Términos) */
-    .prose p { margin-bottom: 1rem; color: rgba(0,0,0,0.7); }
-    .dark .prose p { color: rgba(255,255,255,0.7); }
     
-    .prose ul { list-style: none; margin-bottom: 1.5rem; }
-    .prose li { position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; color: rgba(0,0,0,0.7); }
-    .dark .prose li { color: rgba(255,255,255,0.7); }
+    .dark .glass { backdrop-filter: blur(10px); background: linear-gradient(180deg, rgba(18,18,26,.8), rgba(18,18,26,.6)); border: 1px solid rgba(255,255,255,.07) }
+
+    /* Mejoras en tipografía para lectura legal */
+    .prose p { margin-bottom: 1.25rem; line-height: 1.7; color: rgba(0,0,0,0.8); }
+    .dark .prose p { color: rgba(255,255,255,0.8); }
+    
+    .prose ul { list-style: none; margin-bottom: 1.5rem; background: rgba(0,0,0,0.03); padding: 1.5rem; border-radius: 1rem; }
+    .dark .prose ul { background: rgba(255,255,255,0.03); }
+    
+    .prose li { position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; color: rgba(0,0,0,0.8); }
+    .dark .prose li { color: rgba(255,255,255,0.8); }
     
     .prose li::before {
-        content: "\f054"; /* Icono de flecha de FontAwesome */
+        content: "\f00c"; /* Checkmark en vez de flecha para normas */
         font-family: "Font Awesome 6 Free";
         font-weight: 900;
         position: absolute;
         left: 0;
-        color: #ca1dca; /* Tu color primario */
+        color: #ca1dca;
         font-size: 0.8rem;
-        top: 0.2rem;
+        top: 0.3rem;
     }
 
-    .prose strong { color: #000; font-weight: 700; }
-    .dark .prose strong { color: #fff; }
-
-    /* Efectos de Nieve (Copiados de tu landing) */
     .glass:hover {
-      border-top: 4px solid rgba(255, 255, 255, 0.9);
-      box-shadow: 0 -4px 15px rgba(255, 255, 255, 0.4), 0 4px 30px rgba(0,0,0,0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.5); /* Sutil cambio */
+      box-shadow: 0 10px 40px -10px rgba(202, 29, 202, 0.1);
     }
-    .snowflake {
-      position: fixed;
-      top: -10px;
-      color: white;
-      font-family: monospace;
-      user-select: none;
-      pointer-events: none;
-      z-index: 9999;
-      animation-name: fall;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      opacity: 0.8;
-      text-shadow: 0 0 5px rgba(255,255,255,0.8);
-    }
+    
+    /* Scroll offset para el menu sticky */
+    section[id] { scroll-margin-top: 100px; }
+
+    /* Copos de nieve */
+    .snowflake { position: fixed; top: -10px; color: white; font-family: monospace; user-select: none; pointer-events: none; z-index: 9999; animation-name: fall; animation-timing-function: linear; animation-iteration-count: infinite; opacity: 0.8; }
     @keyframes fall { to { transform: translateY(110vh); } }
   </style>
 </head>
 
-<body class="bg-white text-black antialiased" data-theme="light">
+<body class="bg-white text-black antialiased flex flex-col min-h-screen" data-theme="light">
 
   <header id="nav" class="fixed inset-x-0 top-3 z-50 transition-all">
     <div class="mx-auto max-w-7xl px-4">
-      <div class="flex h-16 items-center justify-between rounded-2xl glass px-4">
+      <div class="flex h-16 items-center justify-between rounded-2xl glass px-4 shadow-lg shadow-black/5 dark:shadow-white/5">
         <a href="/" class="flex items-center gap-3">
-          <img src="/TH.png" alt="TaroHosting" class="h-9 w-9" loading="lazy" />
-          <span class="text-lg font-semibold opacity-90 text-black dark:text-white">TaroHosting</span>
+          <img src="/TH.png" alt="TaroHosting" class="h-9 w-9" />
+          <span class="text-lg font-bold tracking-tight text-black dark:text-white">TaroHosting</span>
         </a>
-        <nav class="hidden md:flex items-center gap-6 text-sm text-black/70 dark:text-white/70">
-          <a href="/#planes" class="hover:text-black dark:hover:text-white">Planes</a>
-          <a href="/#servicios" class="hover:text-black dark:hover:text-white">Servicios</a>
-          <a href="https://discord.com/invite/yYDk6EPHy6" target="_blank" class="hover:text-black dark:hover:text-white">Soporte</a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-black/70 dark:text-white/70">
+          <a href="/#planes" class="hover:text-primary-500 transition-colors">Planes</a>
+          <a href="/#servicios" class="hover:text-primary-500 transition-colors">Servicios</a>
+          <a href="https://discord.com/invite/yYDk6EPHy6" target="_blank" class="hover:text-primary-500 transition-colors">Soporte</a>
         </nav>
         <div class="flex items-center gap-3">
-          <button id="themeToggle" class="rounded-xl p-2 glass" aria-label="Cambiar tema">
+          <button id="themeToggle" class="rounded-xl p-2 glass hover:bg-black/5 dark:hover:bg-white/10 transition-colors" aria-label="Cambiar tema">
             <i class="fa-solid fa-moon"></i>
           </button>
-          <a href="https://billing.tarohosting.com/" class="hidden sm:inline-flex items-center rounded-xl px-4 py-2 text-sm font-semibold text-black dark:text-white bg-primary-500 hover:bg-primary-400 active:bg-primary-600 transition shadow-glow">Área de Clientes</a>
-          <button class="md:hidden rounded-xl p-2 glass" id="menuBtn" aria-label="Abrir menú">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          <a href="https://billing.tarohosting.com/" class="hidden sm:inline-flex items-center rounded-xl px-4 py-2 text-sm font-bold text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:brightness-110 transition shadow-glow">Área de Clientes</a>
+          <button class="md:hidden rounded-xl p-2 glass" id="menuBtn">
+            <i class="fa-solid fa-bars text-lg"></i>
           </button>
         </div>
       </div>
       <div id="mobile" class="hidden mt-2 glass rounded-2xl p-3 md:hidden">
-        <a href="/#planes" class="block px-3 py-2 rounded-lg text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/5">Planes</a>
-        <a href="/#servicios" class="block px-3 py-2 rounded-lg text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/5">Servicios</a>
-        <a href="https://discord.com/invite/yYDk6EPHy6" target="_blank" class="block px-3 py-2 rounded-lg text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/5">Soporte</a>
+        <a href="/#planes" class="block px-3 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5">Planes</a>
+        <a href="https://billing.tarohosting.com/" class="block px-3 py-2 rounded-lg text-primary-500 font-bold">Área de Clientes</a>
       </div>
     </div>
   </header>
 
   <section class="relative pt-32 pb-12 overflow-hidden bg-hero">
-    <div class="absolute inset-0 bg-grid bg-[length:22px_22px] [mask-image:linear-gradient(to_bottom,black,transparent_85%)]"></div>
+    <div class="absolute inset-0 bg-grid bg-[length:30px_30px] [mask-image:linear-gradient(to_bottom,black,transparent_90%)] opacity-50"></div>
     <div class="relative mx-auto max-w-4xl px-4 text-center">
-      <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">
+      <h1 class="text-4xl sm:text-6xl font-black leading-tight tracking-tight mb-6">
         Términos de <span class="gradient-text">Servicio</span>
       </h1>
-      <div class="mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-sm text-black/70 dark:text-white/70">
-        <i class="fa-regular fa-clock text-primary-300"></i>
-        <span>Última actualización: Enero 2025</span>
+      <p class="text-lg text-black/60 dark:text-white/60 max-w-2xl mx-auto mb-6">
+        Por favor lee atentamente estos términos antes de usar nuestros servicios. Queremos asegurar la mejor experiencia para todos.
+      </p>
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-medium text-black/80 dark:text-white/80 border border-primary-500/30">
+        <i class="fa-regular fa-calendar-check text-primary-500"></i>
+        <span>Última actualización: <strong>Enero 2025</strong></span>
       </div>
     </div>
   </section>
 
-  <section class="relative pb-20">
-    <div class="mx-auto max-w-4xl px-4">
-      
-      <div class="glass rounded-3xl p-8 md:p-12 border border-black/10 dark:border-white/10 prose">
+  <section class="relative pb-24 px-4">
+    <div class="mx-auto max-w-7xl">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
         
-        <div class="mb-10 last:mb-0">
-            <div class="flex items-center gap-4 mb-4">
-                <div class="h-10 w-10 rounded-xl bg-primary-500/20 flex items-center justify-center text-primary-400">
-                    <i class="fa-solid fa-file-contract text-xl"></i>
+        <aside class="hidden lg:block lg:col-span-3 sticky top-24">
+            <div class="glass rounded-2xl p-6 border border-black/5 dark:border-white/5">
+                <h3 class="text-sm font-bold uppercase tracking-wider text-black/50 dark:text-white/50 mb-4">Tabla de Contenidos</h3>
+                <ul class="space-y-1 text-sm">
+                    <li><a href="#acuerdo" class="block py-2 px-3 rounded-lg hover:bg-primary-500/10 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-black/70 dark:text-white/70 font-medium">1. Acuerdo</a></li>
+                    <li><a href="#uso" class="block py-2 px-3 rounded-lg hover:bg-primary-500/10 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-black/70 dark:text-white/70 font-medium">2. Uso Aceptable</a></li>
+                    <li><a href="#pagos" class="block py-2 px-3 rounded-lg hover:bg-primary-500/10 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-black/70 dark:text-white/70 font-medium">3. Pagos y Reembolsos</a></li>
+                    <li><a href="#datos" class="block py-2 px-3 rounded-lg hover:bg-primary-500/10 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-black/70 dark:text-white/70 font-medium">4. Datos y Backups</a></li>
+                    <li><a href="#soporte" class="block py-2 px-3 rounded-lg hover:bg-primary-500/10 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-black/70 dark:text-white/70 font-medium">5. Soporte</a></li>
+                    <li><a href="#legal" class="block py-2 px-3 rounded-lg hover:bg-primary-500/10 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-black/70 dark:text-white/70 font-medium">6. Aviso Legal (Mojang)</a></li>
+                </ul>
+                <div class="mt-6 pt-6 border-t border-black/10 dark:border-white/10">
+                    <a href="#" onclick="window.print()" class="flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider text-black/40 dark:text-white/40 hover:text-black dark:hover:text-white transition-colors">
+                        <i class="fa-solid fa-print"></i> Imprimir Términos
+                    </a>
                 </div>
-                <h2 class="text-2xl font-bold text-black dark:text-white">1. Aceptación del Acuerdo</h2>
             </div>
-            <p>Al registrarse, adquirir o utilizar los servicios proporcionados por <strong>Tarohosting</strong>, usted acepta estar legalmente vinculado por estos Términos de Servicio. Si no está de acuerdo con alguna parte de estos términos, no debe utilizar nuestros servicios.</p>
-        </div>
+        </aside>
 
-        <hr class="border-black/5 dark:border-white/5 my-8">
-
-        <div class="mb-10 last:mb-0">
-            <div class="flex items-center gap-4 mb-4">
-                <div class="h-10 w-10 rounded-xl bg-primary-500/20 flex items-center justify-center text-primary-400">
-                    <i class="fa-solid fa-shield-halved text-xl"></i>
+        <main class="lg:col-span-9 space-y-6">
+            
+            <section id="acuerdo" class="glass rounded-3xl p-8 md:p-10 border border-black/5 dark:border-white/5 prose">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="h-12 w-12 rounded-2xl bg-gradient-to-br from-primary-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-primary-500/30">
+                        <i class="fa-solid fa-file-contract text-xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-black dark:text-white m-0">1. Aceptación del Acuerdo</h2>
                 </div>
-                <h2 class="text-2xl font-bold text-black dark:text-white">2. Uso Aceptable y Restricciones</h2>
-            </div>
-            <p>Nuestros servicios están destinados al alojamiento de servidores de juegos (Minecraft). Está estrictamente prohibido:</p>
-            <ul>
-                <li>Utilizar el servidor para minería de criptomonedas.</li>
-                <li>Ejecutar scripts maliciosos, botnets o realizar ataques DDoS.</li>
-                <li>Alojar contenido ilegal, pornográfico o que viole derechos de autor.</li>
-                <li>Consumir recursos de CPU/Disco de manera excesiva que afecte a otros clientes.</li>
-            </ul>
-            <p class="text-red-500 font-medium bg-red-500/10 p-3 rounded-lg border border-red-500/20 inline-block">
-                <i class="fa-solid fa-triangle-exclamation mr-2"></i>Tarohosting se reserva el derecho de suspender cualquier servicio que viole estas normas sin previo aviso.
-            </p>
-        </div>
+                <p>Al registrarse, adquirir o utilizar los servicios proporcionados por <strong>Tarohosting</strong> ("nosotros", "nuestro"), usted ("el cliente") acepta estar legalmente vinculado por estos Términos de Servicio. Estos términos pueden ser actualizados en cualquier momento, siendo responsabilidad del cliente revisarlos periódicamente.</p>
+                <p>El uso continuado de los servicios tras cualquier cambio constituye la aceptación de los nuevos términos.</p>
+            </section>
 
-        <hr class="border-black/5 dark:border-white/5 my-8">
-
-        <div class="mb-10 last:mb-0">
-            <div class="flex items-center gap-4 mb-4">
-                <div class="h-10 w-10 rounded-xl bg-primary-500/20 flex items-center justify-center text-primary-400">
-                    <i class="fa-solid fa-money-bill-wave text-xl"></i>
+            <section id="uso" class="glass rounded-3xl p-8 md:p-10 border border-black/5 dark:border-white/5 prose">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="h-12 w-12 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/30">
+                        <i class="fa-solid fa-shield-halved text-xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-black dark:text-white m-0">2. Uso Aceptable y Restricciones</h2>
                 </div>
-                <h2 class="text-2xl font-bold text-black dark:text-white">3. Política de Reembolsos</h2>
-            </div>
-            <p>Debido a la naturaleza digital e inmediata de nuestros servicios, <strong>todas las ventas son finales</strong>. No ofrecemos reembolsos una vez que el servicio ha sido entregado, excepto en casos donde el error sea enteramente atribuible a Tarohosting.</p>
-            <p><strong>Importante:</strong> Iniciar una disputa de pago (chargeback) sin contactar primero a soporte resultará en la suspensión inmediata de todos sus servicios y el baneo permanente.</p>
-        </div>
-
-        <hr class="border-black/5 dark:border-white/5 my-8">
-
-        <div class="mb-10 last:mb-0">
-            <div class="flex items-center gap-4 mb-4">
-                <div class="h-10 w-10 rounded-xl bg-primary-500/20 flex items-center justify-center text-primary-400">
-                    <i class="fa-solid fa-database text-xl"></i>
+                <p>Nuestros servicios están optimizados para servidores de juegos (Minecraft). Para garantizar la calidad para todos los clientes, aplicamos las siguientes restricciones estrictas:</p>
+                <ul>
+                    <li><strong>Minería de Criptomonedas:</strong> Estrictamente prohibida. Detección automática resultará en suspensión.</li>
+                    <li><strong>Actividades Ilegales:</strong> Scripts maliciosos, botnets, phishing, escaneo de puertos o ataques DDoS (salientes).</li>
+                    <li><strong>Contenido Prohibido:</strong> Alojamiento de material ilegal, pornografía infantil o contenido que viole derechos de autor (DMCA).</li>
+                    <li><strong>Abuso de Recursos:</strong> Uso injusto de CPU/Disco (ej. plugins mal optimizados que saturen el nodo compartido) puede requerir una actualización de plan o limitación.</li>
+                </ul>
+                <div class="bg-red-500/5 border border-red-500/20 rounded-xl p-4 flex gap-3 items-start">
+                    <i class="fa-solid fa-triangle-exclamation text-red-500 mt-1"></i>
+                    <p class="text-sm text-red-600/80 dark:text-red-400/90 m-0"><strong>Tolerancia Cero:</strong> Tarohosting se reserva el derecho de terminar inmediatamente cualquier servicio que viole estas normas, sin derecho a reembolso.</p>
                 </div>
-                <h2 class="text-2xl font-bold text-black dark:text-white">4. Datos y Backups</h2>
-            </div>
-            <p>Aunque nos esforzamos por mantener la integridad de los datos, <strong>el cliente es el único responsable de realizar copias de seguridad (backups)</strong>. Tarohosting no se hace responsable por la pérdida de datos causada por fallos del usuario, corrupción de mundos o plugins defectuosos.</p>
-        </div>
+            </section>
 
-        <hr class="border-black/5 dark:border-white/5 my-8">
-
-        <div class="mb-6">
-            <div class="flex items-center gap-4 mb-4">
-                <div class="h-10 w-10 rounded-xl bg-primary-500/20 flex items-center justify-center text-primary-400">
-                    <i class="fa-solid fa-headset text-xl"></i>
+            <section id="pagos" class="glass rounded-3xl p-8 md:p-10 border border-black/5 dark:border-white/5 prose">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="h-12 w-12 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-white shadow-lg shadow-green-500/30">
+                        <i class="fa-solid fa-money-bill-wave text-xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-black dark:text-white m-0">3. Pagos y Política de Reembolsos</h2>
                 </div>
-                <h2 class="text-2xl font-bold text-black dark:text-white">5. Soporte Técnico</h2>
-            </div>
-            <p>Nuestro soporte cubre problemas relacionados con la red, el hardware y el panel. No ofrecemos soporte garantizado para configuración interna de plugins o mods, aunque intentaremos ayudar.</p>
-        </div>
+                <p>Los servicios se pagan por adelantado. La falta de pago en la fecha de vencimiento resultará en la suspensión del servicio. Los datos pueden ser eliminados permanentemente 7 días después de la suspensión.</p>
+                <h3 class="text-lg font-bold text-black dark:text-white mt-4">Política de Reembolso</h3>
+                <p>Debido a la naturaleza digital de nuestros productos:</p>
+                <ul>
+                   <li><strong>Todas las ventas son finales</strong> una vez el servicio ha sido aprovisionado.</li>
+                   <li>Se evaluarán excepciones solo si el error es técnico y atribuible enteramente a nuestra infraestructura.</li> 
+                </ul>
+                <p class="text-xs text-black/50 dark:text-white/50 uppercase tracking-widest font-bold mt-4">Disputas / Chargebacks</p>
+                <p class="text-sm">Iniciar una disputa de pago sin contactar primero a soporte resultará en el <strong>baneo permanente</strong> de nuestra plataforma y reporte a bases de datos de fraude compartidas.</p>
+            </section>
 
-        <div class="mt-8 rounded-2xl p-6 bg-indigo-500/10 border border-indigo-500/20 text-center">
-            <h3 class="text-xl font-bold text-black dark:text-white mb-2">¿Tienes dudas sobre los términos?</h3>
-            <p class="mb-5 text-sm">Nuestro equipo de soporte está disponible para aclararlas.</p>
-            <a href="https://discord.com/invite/yYDk6EPHy6" target="_blank" class="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white bg-[#5865F2] hover:bg-[#4752c4] transition shadow-lg shadow-indigo-500/30">
-                <i class="fa-brands fa-discord"></i> Unirse al Discord
-            </a>
-        </div>
+            <section id="datos" class="glass rounded-3xl p-8 md:p-10 border border-black/5 dark:border-white/5 prose">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="h-12 w-12 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center text-white shadow-lg shadow-orange-500/30">
+                        <i class="fa-solid fa-database text-xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-black dark:text-white m-0">4. Datos y Backups</h2>
+                </div>
+                <p>El cliente es el <strong>único responsable</strong> de sus datos.</p>
+                <p>Aunque realizamos copias de seguridad de nuestra infraestructura para recuperación de desastres, no garantizamos la recuperación de archivos individuales perdidos por acciones del usuario (ej. borrar mundo accidentalmente, corrupción por plugins).</p>
+                <p>Recomendamos encarecidamente realizar descargas locales de sus copias de seguridad periódicamente.</p>
+            </section>
 
+             <section id="soporte" class="glass rounded-3xl p-8 md:p-10 border border-black/5 dark:border-white/5 prose">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="h-12 w-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30">
+                        <i class="fa-solid fa-headset text-xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-black dark:text-white m-0">5. Alcance del Soporte</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="p-4 rounded-xl bg-green-500/10 border border-green-500/20">
+                        <h4 class="font-bold text-green-600 dark:text-green-400 mb-2"><i class="fa-solid fa-check mr-2"></i>Incluido</h4>
+                        <ul class="text-sm space-y-1 mb-0 !bg-transparent !p-0">
+                            <li class="!pl-0 before:content-none">Estado de la red y nodos</li>
+                            <li class="!pl-0 before:content-none">Acceso al Panel de Control</li>
+                            <li class="!pl-0 before:content-none">Problemas de facturación</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 rounded-xl bg-red-500/10 border border-red-500/20">
+                        <h4 class="font-bold text-red-600 dark:text-red-400 mb-2"><i class="fa-solid fa-xmark mr-2"></i>No Incluido</h4>
+                        <ul class="text-sm space-y-1 mb-0 !bg-transparent !p-0">
+                            <li class="!pl-0 before:content-none">Configuración de Plugins/Mods</li>
+                            <li class="!pl-0 before:content-none">Creación de servidores "desde cero"</li>
+                            <li class="!pl-0 before:content-none">Desarrollo de Webs</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="legal" class="p-8 md:p-10 rounded-3xl border border-black/10 dark:border-white/10 text-center opacity-70 hover:opacity-100 transition-opacity">
+                <h3 class="text-lg font-bold text-black dark:text-white mb-2">Aviso de Afiliación (Disclaimer)</h3>
+                <p class="text-sm text-black/70 dark:text-white/70 max-w-2xl mx-auto">
+                    TaroHosting no está afiliado, asociado, autorizado, respaldado ni conectado oficialmente de ninguna manera con <strong>Mojang Studios</strong>, <strong>Microsoft</strong>, o cualquiera de sus subsidiarias o afiliadas. El nombre Minecraft, así como las marcas y activos relacionados, son marcas registradas de sus respectivos propietarios.
+                </p>
+            </section>
+
+        </main>
       </div>
     </div>
   </section>
 
-  <footer class="border-t border-black/10 dark:border-black/10 dark:border-white/10 bg-gray-100 dark:bg-dark-800 mt-auto">
+  <section class="py-12 px-4 text-center">
+    <div class="glass max-w-2xl mx-auto rounded-3xl p-8 border border-primary-500/20 shadow-glow">
+        <h3 class="text-2xl font-bold text-black dark:text-white mb-3">¿Aún tienes dudas?</h3>
+        <p class="text-black/60 dark:text-white/60 mb-6">Nuestro equipo de soporte está disponible 24/7 en Discord para resolver cualquier inquietud antes de tu compra.</p>
+        <a href="https://discord.com/invite/yYDk6EPHy6" target="_blank" class="inline-flex items-center gap-3 rounded-xl px-6 py-3 text-base font-bold text-white bg-[#5865F2] hover:bg-[#4752c4] transition transform hover:-translate-y-1 shadow-lg shadow-indigo-500/30">
+            <i class="fa-brands fa-discord text-xl"></i> Unirse al Discord
+        </a>
+    </div>
+  </section>
+
+  <footer class="border-t border-black/10 dark:border-white/5 bg-gray-50 dark:bg-black/20 mt-auto backdrop-blur-sm">
     <div class="mx-auto max-w-7xl px-4 py-12 grid md:grid-cols-4 gap-10">
-      <div>
-        <img src="/TaroHosting.png" alt="TaroHosting" class="h-12 w-auto mb-3" />
-        <p class="text-sm text-black/70 dark:text-white/70 max-w-xs">Calidad y honestidad al mejor precio ✨<br> Hosting confiable para que tu proyecto crezca sin límites.</p>
+      <div class="col-span-1 md:col-span-2">
+        <div class="flex items-center gap-2 mb-4">
+            <img src="/TH.png" alt="TaroHosting" class="h-10 w-10" />
+            <span class="font-bold text-xl text-black dark:text-white">TaroHosting</span>
+        </div>
+        <p class="text-sm text-black/60 dark:text-white/60 max-w-xs leading-relaxed">
+          Ofrecemos hosting de alto rendimiento para Minecraft. Servidores rápidos, soporte amigable y precios accesibles para toda la comunidad hispana.
+        </p>
       </div>
+      
       <div>
-        <h4 class="text-black dark:text-white font-semibold mb-3">Enlaces rápidos</h4>
-        <ul class="space-y-2 text-sm text-black/70 dark:text-white/70">
-          <li><a href="/#planes" class="hover:text-black dark:hover:text-white">Planes</a></li>
-          <li><a href="/#servicios" class="hover:text-black dark:hover:text-white">Servicios</a></li>
-          <li><a href="https://discord.com/invite/yYDk6EPHy6" target="_blank" class="hover:text-black dark:hover:text-white">Soporte</a></li>
+        <h4 class="text-black dark:text-white font-bold mb-4">Legal</h4>
+        <ul class="space-y-2 text-sm text-black/60 dark:text-white/60">
+          <li><a href="#" class="hover:text-primary-500 transition-colors">Términos de Servicio</a></li>
+          <li><a href="#" class="hover:text-primary-500 transition-colors">Política de Privacidad</a></li>
         </ul>
       </div>
       <div>
-        <h4 class="text-black dark:text-white font-semibold mb-3">Servicios</h4>
-        <ul class="space-y-2 text-sm text-black/70 dark:text-white/70">
-          <li>Minecraft Hosting</li>
-          <li>Servidores VPS</li>
-          <li>Protección Anti-DDoS</li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-black dark:text-white font-semibold mb-3">Síguenos</h4>
-        <div class="flex flex-col gap-3">
-          <a href="https://discord.com/invite/yYDk6EPHy6" target="_blank" class="inline-flex items-center gap-2 rounded-xl px-4 py-2 glass border border-black/10 dark:border-black/10 dark:border-white/10 text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/10">
-            <i class="fa-brands fa-discord"></i> Discord de soporte
+        <h4 class="text-black dark:text-white font-bold mb-4">Redes</h4>
+        <div class="flex gap-4">
+          <a href="https://discord.com/invite/yYDk6EPHy6" target="_blank" class="h-10 w-10 rounded-xl glass flex items-center justify-center text-black dark:text-white hover:bg-[#5865F2] hover:text-white transition-all">
+            <i class="fa-brands fa-discord"></i>
+          </a>
+          <a href="#" class="h-10 w-10 rounded-xl glass flex items-center justify-center text-black dark:text-white hover:bg-sky-500 hover:text-white transition-all">
+            <i class="fa-brands fa-twitter"></i>
           </a>
         </div>
       </div>
     </div>
-    <div class="border-t border-black/10 dark:border-white/10 py-6 text-center text-sm text-black/60 dark:text-white/60">
-      © <span id="y"></span> TaroHosting. Todos los derechos reservados. <br>
-      <span class="text-xs text-black/50 dark:text-white/50">Desarrollado por <span class="font-semibold">The Quantum Development</span></span>
+    <div class="border-t border-black/5 dark:border-white/5 py-8 text-center">
+      <p class="text-sm text-black/50 dark:text-white/50">
+        © <span id="y"></span> TaroHosting. Todos los derechos reservados.
+      </p>
+      <p class="text-xs text-black/30 dark:text-white/30 mt-2">
+        No afiliado con Mojang Studios.
+      </p>
     </div>
   </footer>
 
   <script>
-    // Menú móvil
+    // Mobile Menu
     document.getElementById('menuBtn')?.addEventListener('click', () => {
       document.getElementById('mobile').classList.toggle('hidden');
     });
 
-    // Año footer
+    // Date
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Toggle theme
+    // Theme Toggle
     const body = document.body;
     const themeToggle = document.getElementById("themeToggle");
+    const icon = themeToggle.querySelector("i");
 
-    if (localStorage.getItem("theme") === "dark") setDark();
-    else setLight();
+    // Check saved theme
+    if (localStorage.getItem("theme") === "dark") {
+        setDark();
+    } else {
+        setLight();
+    }
 
     themeToggle.addEventListener("click", () => {
       if (body.dataset.theme === "light") {
@@ -261,35 +312,37 @@
 
     function setDark() {
       body.dataset.theme = "dark";
-      body.classList.add("dark","bg-dark-900","text-white");
-      body.classList.remove("bg-white","text-black");
+      body.classList.add("dark", "bg-dark-900", "text-white");
+      body.classList.remove("bg-white", "text-black");
+      icon.classList.remove("fa-moon");
+      icon.classList.add("fa-sun");
       document.documentElement.style.colorScheme = "dark";
-      themeToggle.innerHTML = `<i class="fa-solid fa-sun"></i>`;
     }
 
     function setLight() {
       body.dataset.theme = "light";
-      body.classList.remove("dark","bg-dark-900","text-white");
-      body.classList.add("bg-white","text-black");
+      body.classList.remove("dark", "bg-dark-900", "text-white");
+      body.classList.add("bg-white", "text-black");
+      icon.classList.remove("fa-sun");
+      icon.classList.add("fa-moon");
       document.documentElement.style.colorScheme = "light";
-      themeToggle.innerHTML = `<i class="fa-solid fa-moon"></i>`;
     }
 
-    // Efecto de nieve (Navidad)
+    // Snow Effect (Mantenido porque es tu estilo, pero optimizado)
     function createSnow() {
       const snowflake = document.createElement('div');
       snowflake.classList.add('snowflake');
-      snowflake.innerText = '■'; 
+      snowflake.innerText = '❄'; // Cambiado a un copo real
       snowflake.style.left = Math.random() * 100 + 'vw';
-      const size = Math.random() * 10 + 5 + 'px';
-      snowflake.style.fontSize = size;
-      snowflake.style.animationDuration = Math.random() * 3 + 4 + 's';
+      snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+      snowflake.style.animationDuration = Math.random() * 3 + 5 + 's';
+      snowflake.style.opacity = Math.random();
       document.body.appendChild(snowflake);
-      setTimeout(() => { snowflake.remove(); }, 5000);
+      setTimeout(() => { snowflake.remove(); }, 8000);
     }
-    setInterval(createSnow, 300);
+    // Reducido intervalo para no saturar el navegador
+    setInterval(createSnow, 500);
   </script>
 
 </body>
 </html>
-
