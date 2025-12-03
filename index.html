@@ -4,289 +4,446 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Términos de Servicio | Tarohosting</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* --- Configuración y Variables --- */
+        /* --- Variables y Configuración --- */
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --card-hover: #263345;
-            --text-main: #f1f5f9;
-            --text-muted: #94a3b8;
-            --accent: #6366f1;
-            --accent-glow: rgba(99, 102, 241, 0.3);
-            --danger: #ef4444;
+            --bg-color: #0f172a;       /* Slate 900 */
+            --bg-secondary: #1e293b;   /* Slate 800 */
+            --card-bg: rgba(30, 41, 59, 0.7); /* Glass effect */
+            --border-color: rgba(255, 255, 255, 0.08);
+            
+            --primary: #6366f1;        /* Indigo 500 */
+            --primary-hover: #4f46e5;  /* Indigo 600 */
+            --accent-glow: rgba(99, 102, 241, 0.15);
+            
+            --text-main: #f8fafc;      /* Slate 50 */
+            --text-muted: #94a3b8;     /* Slate 400 */
+            
             --success: #22c55e;
+            --danger: #ef4444;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
-            line-height: 1.7;
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-            background-image: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+            line-height: 1.6;
+            /* Fondo tecnológico sutil */
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(99, 102, 241, 0.08) 0%, transparent 25%),
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        .container {
-            max-width: 900px;
+        a { text-decoration: none; color: inherit; transition: 0.2s; }
+        ul { list-style: none; }
+
+        /* --- Barra de Navegación (Estilo Landing Page) --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            margin: 40px auto;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
         }
 
-        /* --- Cabecera --- */
-        header {
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover { color: #fff; }
+
+        .btn-nav {
+            background-color: var(--primary);
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-weight: 600 !important;
+        }
+        .btn-nav:hover { background-color: var(--primary-hover); transform: translateY(-1px); }
+
+        /* --- Contenedor Principal --- */
+        .main-container {
+            flex: 1;
+            max-width: 1000px;
+            width: 90%;
+            margin: 120px auto 60px; /* Margen superior para compensar navbar */
+        }
+
+        /* --- Cabecera de Página --- */
+        .page-header {
             text-align: center;
-            margin-bottom: 50px;
-            animation: fadeIn 1s ease-in;
+            margin-bottom: 60px;
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 800;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -1px;
+            margin-bottom: 15px;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
         }
 
-        .subtitle {
-            color: var(--text-muted);
-            font-size: 1.2rem;
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 30%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .last-updated {
-            display: inline-block;
-            margin-top: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             font-size: 0.85rem;
             background: rgba(255,255,255,0.05);
-            padding: 4px 12px;
-            border-radius: 20px;
+            padding: 6px 16px;
+            border-radius: 50px;
             color: var(--text-muted);
+            border: 1px solid var(--border-color);
         }
 
-        /* --- Tarjeta Principal --- */
+        /* --- Tarjeta de Contenido --- */
         .content-card {
             background-color: var(--card-bg);
-            padding: 50px;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 60px;
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02), 0 20px 40px -10px rgba(0, 0, 0, 0.5);
         }
 
-        /* --- Secciones --- */
+        /* --- Secciones de Términos --- */
         .term-section {
-            margin-bottom: 40px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 50px;
+            position: relative;
         }
-
-        .term-section:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
+        
+        /* Línea conectora sutil */
+        .term-section:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 60px;
+            bottom: -30px;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--border-color), transparent);
+            z-index: 0;
         }
 
         .section-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 15px;
+            gap: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
         }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .icon-box svg { width: 26px; height: 26px; }
 
         h2 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             color: #fff;
-            font-weight: 600;
+            font-weight: 700;
         }
 
-        /* Iconos SVG */
-        .icon {
-            width: 24px;
-            height: 24px;
-            color: var(--accent);
-            flex-shrink: 0;
+        .section-content {
+            padding-left: 70px; /* Alinear con el título */
         }
 
         p {
             color: var(--text-muted);
-            font-size: 1rem;
             margin-bottom: 15px;
+            font-size: 1.05rem;
         }
 
-        ul {
-            list-style: none;
-            margin-bottom: 15px;
-            padding-left: 10px;
-        }
-
-        li {
+        /* Listas personalizadas */
+        ul.custom-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
             color: var(--text-muted);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
         }
 
-        li::before {
-            content: "•";
-            color: var(--accent);
+        ul.custom-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
             font-weight: bold;
         }
 
-        /* Texto destacado */
-        strong {
-            color: #fff;
-        }
-
-        .highlight-red {
-            color: #f87171;
-        }
+        /* Highlights */
+        strong { color: #fff; font-weight: 600; }
+        .highlight-red { color: var(--danger); font-weight: 600; }
 
         /* --- Botón Discord --- */
-        .cta-container {
-            margin-top: 30px;
+        .discord-box {
+            background: linear-gradient(135deg, rgba(88, 101, 242, 0.1), rgba(88, 101, 242, 0.05));
+            border: 1px solid rgba(88, 101, 242, 0.3);
+            border-radius: 16px;
+            padding: 30px;
             text-align: center;
-            padding: 20px;
-            background: rgba(88, 101, 242, 0.1);
-            border-radius: 12px;
-            border: 1px solid rgba(88, 101, 242, 0.2);
+            margin-top: 40px;
         }
 
         .discord-btn {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             background-color: #5865F2;
             color: white;
-            padding: 12px 28px;
-            border-radius: 8px;
-            text-decoration: none;
+            padding: 14px 32px;
+            border-radius: 12px;
             font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 14px 0 rgba(88, 101, 242, 0.39);
+            font-size: 1.1rem;
+            margin-top: 15px;
+            box-shadow: 0 4px 20px rgba(88, 101, 242, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .discord-btn:hover {
-            background-color: #4752c4;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px 0 rgba(88, 101, 242, 0.5);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(88, 101, 242, 0.5);
         }
 
-        /* --- Footer --- */
+        /* --- Footer Completo --- */
         footer {
+            background-color: rgba(15, 23, 42, 0.5);
+            border-top: 1px solid var(--border-color);
+            padding: 60px 5% 30px;
+            margin-top: auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .footer-brand p { font-size: 0.9rem; max-width: 300px; }
+
+        .footer-col h4 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: var(--text-muted); font-size: 0.9rem; }
+        .footer-col ul li a:hover { color: var(--primary); }
+
+        .footer-bottom {
             text-align: center;
-            margin-top: 50px;
-            padding-bottom: 20px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            opacity: 0.7;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: rgba(148, 163, 184, 0.6);
         }
 
-        /* --- Media Queries --- */
-        @media (max-width: 600px) {
-            .content-card { padding: 25px; }
-            h1 { font-size: 2.2rem; }
-            .section-header { flex-direction: column; align-items: flex-start; gap: 5px; }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 20px; }
+            .nav-links { display: none; } /* Ocultar menú en móvil para simplificar */
+            h1 { font-size: 2.5rem; }
+            .content-card { padding: 30px; }
+            .section-content { padding-left: 0; margin-top: 15px; }
+            .section-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .term-section:not(:last-child)::after { display: none; }
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+            .footer-brand p { margin: 0 auto; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Tarohosting</h1>
-            <p class="subtitle">Términos y Condiciones de Servicio</p>
-            <span class="last-updated">Última actualización: Enero 2025</span>
+    <nav class="navbar">
+        <a href="https://tarohosting.com" class="logo">Tarohosting</a>
+        <div class="nav-links">
+            <a href="#">Inicio</a>
+            <a href="#">Planes Minecraft</a>
+            <a href="#">Estado</a>
+            <a href="#" class="btn-nav">Área de Clientes</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <header class="page-header">
+            <h1 class="gradient-text">Términos de Servicio</h1>
+            <div class="last-updated">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Última actualización: Enero 2025</span>
+            </div>
         </header>
 
         <main class="content-card">
             
             <div class="term-section">
                 <div class="section-header">
-                    <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <div class="icon-box">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </div>
                     <h2>1. Aceptación del Acuerdo</h2>
                 </div>
-                <p>Al registrarse, adquirir o utilizar los servicios proporcionados por <strong>Tarohosting</strong>, usted acepta estar legalmente vinculado por estos Términos de Servicio. Si no está de acuerdo con alguna parte de estos términos, no debe utilizar nuestros servicios.</p>
+                <div class="section-content">
+                    <p>Al registrarse, adquirir o utilizar los servicios proporcionados por <strong>Tarohosting</strong>, usted acepta estar legalmente vinculado por estos Términos de Servicio. Estos términos constituyen un acuerdo vinculante entre usted y Tarohosting.</p>
+                </div>
             </div>
 
             <div class="term-section">
                 <div class="section-header">
-                    <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                    <div class="icon-box">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                    </div>
                     <h2>2. Uso Aceptable y Restricciones</h2>
                 </div>
-                <p>Nuestros servicios están destinados al alojamiento de servidores de juegos (Minecraft). Está estrictamente prohibido:</p>
-                <ul>
-                    <li>Utilizar el servidor para minería de criptomonedas.</li>
-                    <li>Ejecutar scripts maliciosos, botnets o realizar ataques DDoS.</li>
-                    <li>Alojar contenido ilegal, pornográfico o que viole derechos de autor.</li>
-                    <li>Consumir recursos de CPU/Disco de manera excesiva que afecte a otros clientes (en planes compartidos).</li>
-                </ul>
-                <p>Tarohosting se reserva el derecho de suspender o terminar cualquier servicio que viole estas normas sin previo aviso.</p>
-            </div>
-
-            <div class="term-section">
-                <div class="section-header">
-                    <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" /></svg>
-                    <h2>3. Política de Reembolsos y Pagos</h2>
+                <div class="section-content">
+                    <p>Nuestros servicios están optimizados exclusivamente para el alojamiento de servidores de juegos (Minecraft). Para garantizar la calidad del servicio, está estrictamente prohibido:</p>
+                    <ul class="custom-list">
+                        <li>Utilizar el servidor para minería de criptomonedas o procesos ajenos al juego.</li>
+                        <li>Ejecutar scripts maliciosos, botnets o realizar ataques DDoS desde nuestra red.</li>
+                        <li>Alojar contenido ilegal, pornográfico o que viole derechos de propiedad intelectual.</li>
+                        <li>Consumo abusivo de recursos (CPU/Disco) que degrade el rendimiento del nodo compartido.</li>
+                    </ul>
+                    <p><em>Tarohosting se reserva el derecho de suspender inmediatamente cualquier servicio que viole estas políticas.</em></p>
                 </div>
-                <p>Debido a la naturaleza digital e inmediata de nuestros servicios, <strong>todas las ventas son finales</strong>. No ofrecemos reembolsos una vez que el servicio ha sido entregado, excepto en casos donde el error sea enteramente atribuible a Tarohosting.</p>
-                <p><span class="highlight-red">Importante:</span> Iniciar una disputa de pago (chargeback) sin contactar primero a soporte resultará en la suspensión inmediata de todos sus servicios y el baneo permanente de nuestra plataforma.</p>
             </div>
 
             <div class="term-section">
                 <div class="section-header">
-                    <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>
-                    <h2>4. Datos y Copias de Seguridad</h2>
+                    <div class="icon-box">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
+                    </div>
+                    <h2>3. Política de Pagos y Reembolsos</h2>
                 </div>
-                <p>Aunque nos esforzamos por mantener la integridad de los datos, <strong>el cliente es el único responsable de realizar copias de seguridad (backups)</strong> de sus archivos.</p>
-                <p>Tarohosting no se hace responsable por la pérdida de datos causada por fallos del usuario, corrupción de mundos de Minecraft, plugins defectuosos o fallos catastróficos de hardware.</p>
+                <div class="section-content">
+                    <p>Debido a la naturaleza digital y la activación inmediata de nuestros servicios:</p>
+                    <ul class="custom-list">
+                        <li><strong>Todas las ventas son finales.</strong> No ofrecemos reembolsos una vez entregado el servicio, salvo error atribuible a nuestra plataforma.</li>
+                        <li>Las disputas de pago (chargebacks) sin contacto previo con soporte resultarán en la <strong>terminación inmediata</strong> de la cuenta y el baneo permanente.</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="term-section">
                 <div class="section-header">
-                    <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                    <div class="icon-box">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>
+                    </div>
+                    <h2>4. Seguridad de Datos</h2>
+                </div>
+                <div class="section-content">
+                    <p>El cliente es el único responsable de la integridad de sus datos. <strong>Se recomienda encarecidamente realizar copias de seguridad (backups) periódicas y externas.</strong></p>
+                    <p>Tarohosting no se hace responsable por pérdida de datos derivada de corrupción de mundos, plugins defectuosos, errores de usuario o fallos de hardware imprevisibles.</p>
+                </div>
+            </div>
+
+            <div class="term-section">
+                <div class="section-header">
+                    <div class="icon-box">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                    </div>
                     <h2>5. Soporte Técnico</h2>
                 </div>
-                <p>Nuestro soporte cubre problemas relacionados con la red, el hardware y el panel de control. No ofrecemos soporte para la configuración interna de plugins, mods o desarrollo del servidor, aunque intentaremos ayudar en la medida de lo posible.</p>
+                <div class="section-content">
+                    <p>Ofrecemos soporte para problemas de red, hardware y panel de control. El soporte para configuración interna (plugins, mods) se ofrece como cortesía ("Best Effort") y no está garantizado.</p>
+                    
+                    <div class="discord-box">
+                        <p style="color: #fff; margin-bottom: 5px;">¿Necesitas ayuda o tienes dudas?</p>
+                        <p style="font-size: 0.9rem;">Nuestro equipo está disponible 24/7 en Discord.</p>
+                        <a href="https://discord.com/invite/CFXEXj9P6K" target="_blank" class="discord-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.419-2.1568 2.419zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.419-2.1568 2.419z"/></svg>
+                            Unirse al Discord
+                        </a>
+                    </div>
+                </div>
             </div>
 
-            <div class="term-section">
-                <div class="section-header">
-                    <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                    <h2>6. Contacto</h2>
-                </div>
-                <p>Para resolver dudas sobre estos términos o solicitar asistencia, nuestro canal oficial es Discord.</p>
-                
-                <div class="cta-container">
-                    <a href="https://discord.com/invite/CFXEXj9P6K" target="_blank" class="discord-btn">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.419-2.1568 2.419zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.419-2.1568 2.419z"/>
-                        </svg>
-                        Unirse al Discord
-                    </a>
-                </div>
-            </div>
         </main>
-
-        <footer>
-            <p>&copy; 2025 Tarohosting. Todos los derechos reservados.</p>
-        </footer>
     </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>Tarohosting</h3>
+                <p>Alojamiento de servidores de Minecraft de alto rendimiento, creado por gamers para gamers.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Servicios</h4>
+                <ul>
+                    <li><a href="#">Minecraft Java</a></li>
+                    <li><a href="#">Minecraft Bedrock</a></li>
+                    <li><a href="#">Servidores VPS</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Términos de Servicio</a></li>
+                    <li><a href="#">Política de Privacidad</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Tarohosting. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
 </body>
 </html>
